@@ -23,12 +23,13 @@ model User {
 }
 
 model Folder {
-  id                              Int     @id @default(autoincrement())
-  user                            User    @relation(fields: [user_id], references: [id])
+  id                              Int      @id @default(autoincrement())
+  user                            User     @relation(fields: [user_id], references: [id])
   user_id                         Int
-  folder_name                     String  @db.VarChar(30)
-  is_allowed_to_create_sub_folder Boolean @default(true)
-  is_shared                       Boolean @default(false)
+  folder_name                     String   @db.VarChar(30)
+  is_allowed_to_create_sub_folder Boolean  @default(true)
+  is_shared                       Boolean  @default(false)
+  created_at                      DateTime @default(now())
 }
 
 enum Role {

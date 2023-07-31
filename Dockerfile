@@ -8,8 +8,6 @@ RUN npm install -g pnpm
 
 RUN pnpm install
 
-RUN pnpm prisma migrate dev --name init 
+COPY . . 
 
-COPY . .
-
-CMD [ "pnpm", "run", "start" ]
+CMD [ "pnpm", "run", "deploy" ]

@@ -9,6 +9,14 @@
 <a href="https://github.com/Ryuk-me/pocket-url/issues"><img title="issues" src="https://img.shields.io/github/issues/Ryuk-me/pocket-url?style=flat-square">
 
 
+## Database Schema
+
+> https://dbdiagram.io/d/64c7e3c502bd1c4a5eff3af9
+
+
+![Test Case Passed](./assests/db_schema.png)
+
+
 > ## Installation
 
 ```sh
@@ -40,6 +48,10 @@ $ docker-compose --env-file ./.env.docker up
 $ http://localhost:${PORT}/health
 
 ```
+
+## Test Api Endpoints
+
+> Import given postman collection [v2.1] to Postman and test predefined endpoints.
 
 
 #### License

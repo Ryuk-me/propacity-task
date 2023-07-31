@@ -12,6 +12,7 @@ services:
       - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
       - DATABASE_NAME=${POSTGRES_DB}
       - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - JWT_SECRET=${JWT_SECRET}
     ports:
       - ${PORT}:${PORT}
     restart: on-failure
