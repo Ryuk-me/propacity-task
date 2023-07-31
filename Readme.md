@@ -22,7 +22,7 @@ $ pnpm install
 > Rename .env.example to .env
 
 # Migrate Using Prisma
-$ pnpm prisma generate 
+$ pnpm prisma migrate dev --name init 
 
 # Start Server
 $ pnpm run start

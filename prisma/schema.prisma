@@ -9,3 +9,29 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  username   String   @unique @db.VarChar(15)
+  role       Role     @default(USER)
+  password   String
+  created_at DateTime @default(now())
+  folders    Folder[]
+
+  @@index([username, email])
+}
+
+model Folder {
+  id                              Int     @id @default(autoincrement())
+  user                            User    @relation(fields: [user_id], references: [id])
+  user_id                         Int
+  folder_name                     String  @db.VarChar(30)
+  is_allowed_to_create_sub_folder Boolean @default(true)
+  is_shared                       Boolean @default(false)
+}
+
+enum Role {
+  USER
+  ADMIN
+}

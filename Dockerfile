@@ -8,7 +8,7 @@ RUN npm install -g pnpm
 
 RUN pnpm install
 
-RUN pnpm prisma generate 
+RUN pnpm prisma migrate dev --name init 
 
 COPY . .
 
