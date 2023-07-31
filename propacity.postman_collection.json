@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\" : \"ryuk1@gmail.com\",\r\n  \"username\" : \"\",\r\n  \"role\" : \"USER\",\r\n  \"password\" : \"123\"\r\n}",
+							"raw": "{\r\n  \"email\" : \"ryuk1@gmail.com\",\r\n  \"username\" : \"dexter\",\r\n  \"role\" : \"USER\",\r\n  \"password\" : \"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -103,6 +103,23 @@
 						"api",
 						"v1",
 						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/health",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"health"
 					]
 				}
 			},
