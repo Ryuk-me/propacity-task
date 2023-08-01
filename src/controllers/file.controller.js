@@ -34,7 +34,7 @@ export const createFile = async (req, res) => {
 export const renameFile = async (req, res) => {
 	const newFilename = req.body.file_name?.trim()
 	if (!newFilename) if (!file_location) return HttpException(res, 422, { file_name: ["can't be blank"] })
-	let file_location = String(req.body.file_location?.trim())
+	let file_location = req.user.username + "/" + String(req.body.file_location?.trim())
 	if (!file_location) return HttpException(res, 422, { file_location: ["can't be blank"] })
 
 	let file = await getFile(file_location)
@@ -57,19 +57,10 @@ export const renameFile = async (req, res) => {
 	} else return HttpException(res, 500, "Unable to rename this file")
 }
 
-const getFolder = async (folder_location) => {
-	let folder = await db.folder.findUnique({
-		where: {
-			folder_location: folder_location
-		}
-	})
-	return folder
-}
-
 export const deleteFile = async (req, res) => {
-	const file_location = req.body.file_location?.trim()
+	let file_location = req.body.file_location?.trim()
 	if (!file_location) return HttpException(res, 422, { file_location: ["can't be blank"] })
-
+	file_location = req.user.username + "/" + file_location
 	let file = await getFile(file_location)
 
 	if (!file) return HttpException(res, 404, "Provided file doesn't exist at this location.")
@@ -83,6 +74,46 @@ export const deleteFile = async (req, res) => {
 		})
 		return res.status(204).json({})
 	} else return HttpException(res, 500, "Unable to delete this file")
+}
+
+export const moveFile = async (req, res) => {
+	let file_location = req.body.file_location?.trim()
+	let new_location = req.body.new_location?.trim()
+	if (!file_location) return HttpException(res, 422, { file_location: ["can't be blank"] })
+	if (!new_location) return HttpException(res, 422, { new_location: ["can't be blank"] })
+
+	if (String(new_location).endsWith("/")) return HttpException(res, 422, "New folder location cannot end with '/'.")
+
+	file_location = req.user.username + "/" + file_location
+	new_location = req.user.username + "/" + new_location + "/"
+	let file = await getFile(file_location)
+	if (!file) return HttpException(res, 404, "Provided file doesn't exist at this location.")
+
+	if (file.owner_id !== req.user.id) return HttpException(res, 401, "Not Authorised")
+	const folder = await getFolder(new_location)
+
+	if (!folder) return HttpException(res, 404, "Provided folder location doesn't exist please change.")
+
+	if (await AWS.moveFile(file_location, new_location, file.file_name)) {
+		await db.file.update({
+			where: {
+				id: file.id
+			},
+			data: {
+				file_location: new_location + file.file_name
+			}
+		})
+		return res.status(204).json({})
+	} else return HttpException(res, 500, "Unable to delete this file")
+}
+
+const getFolder = async (folder_location) => {
+	let folder = await db.folder.findUnique({
+		where: {
+			folder_location: folder_location
+		}
+	})
+	return folder
 }
 
 const getFolderById = async (folder_id) => {
