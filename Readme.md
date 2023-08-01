@@ -57,6 +57,7 @@ $ http://localhost:${PORT}/health
 <p>
 
 ```json
+RESPONSE 200
 {
 	"app": "propacity-task",
 	"request_ip": "::ffff:10.8.26.10",
@@ -86,7 +87,7 @@ JSON BODY
   "password" : "123"
 }
 
-RESPONSE
+RESPONSE 201
 
 {
     "id": 1,
@@ -109,6 +110,7 @@ RESPONSE
 ```json
 Headers : Bearer eyJhbGciO.......
 
+RESPONSE 200
 {
     "id": 1,
     "email": "ryuk@gmail.com",
@@ -134,7 +136,8 @@ JSON BODY
   "username" : "dexter",
   "password" : "123"
 }
-RESPONSE
+
+RESPONSE 200
 {
     "token_type": "Bearer",
     "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9......"
@@ -157,7 +160,7 @@ JSON BODY
     "folder_name" : "depth1/depth2/branch1"
 }
 
-RESPONSE
+RESPONSE 201
 {
     "id": 1,
     "owner_id": 1,
@@ -186,7 +189,7 @@ FORM DATA
     "file_location" : "depth1/depth2/branch1"
 }
 
-RESPONSE
+RESPONSE 201
 {
     "id": 2,
     "owner_id": 1,
@@ -203,9 +206,58 @@ RESPONSE
 </p>
 </details>
 
+> [POST] Rename File [/api/v1/file/rename](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/file/rename)
+
+<details open>
+<summary> See response</summary>
+<p>
+
+```json
+
+{
+    "file_name" : "abcd.png",
+    "file_location" : "dexter/depth1/File.png"
+}
+
+RESPONSE 200
+{
+    "id": 7,
+    "owner_id": 1,
+    "folder_id": 16,
+    "file_name": "abcd.png",
+    "size": 25335,
+    "file_location": "dexter/depth1/abcd.png",
+    "is_shared": false,
+    "is_banned": false,
+    "created_at": "2023-08-01T19:21:14.807Z"
+}
+```
+
+</p>
+</details>
+
+> [DELETE] Delete File [/api/v1/file/delete](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/file/delete)
+
+<details open>
+<summary> See response</summary>
+<p>
+
+```json
+
+{
+    "file_location" : "dexter/depth1/abcd.png"
+}
+
+RESPONSE 204
+
+```
+
+</p>
+</details>
+
 ## Test Api Endpoints
 
-> Import given postman collection [v2.1] to Postman and test predefined endpoints.[Change Collection Variable Values Accordingly]
+> Import given postman collection [v2.1] to Postman and test predefined endpoints.[ Change Collection Variable Values Accordingly ]
 
 #### License
 
