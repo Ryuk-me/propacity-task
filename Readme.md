@@ -50,7 +50,7 @@ $ http://localhost:${PORT}/health
 
 ```
 
->[GET] Health Endpoint [/health](https://api-propacity-ryuk-me.cloud.okteto.net/health)
+> [GET] Health Endpoint [/health](https://api-propacity-ryuk-me.cloud.okteto.net/health)
 
 <details open>
 <summary> See response</summary>
@@ -70,8 +70,7 @@ $ http://localhost:${PORT}/health
 </p>
 </details>
 
-
->[POST] Create User [/api/v1/user](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/user)
+> [POST] Create User [/api/v1/user](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/user)
 
 <details open>
 <summary> See response</summary>
@@ -87,7 +86,7 @@ JSON BODY
   "password" : "123"
 }
 
-RESPOSNE
+RESPONSE
 
 {
     "id": 1,
@@ -101,7 +100,7 @@ RESPOSNE
 </p>
 </details>
 
->[GET] Current user details [/api/v1/user/me](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/user/me)
+> [GET] Current user details [/api/v1/user/me](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/user/me)
 
 <details open>
 <summary> See response</summary>
@@ -145,7 +144,7 @@ RESPONSE
 </p>
 </details>
 
->[POST] Create Folder [/api/v1/folder/create](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/folder/create)
+> [POST] Create Folder [/api/v1/folder/create](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/folder/create)
 
 <details open>
 <summary> See response</summary>
@@ -173,10 +172,40 @@ RESPONSE
 </p>
 </details>
 
+> [POST] Upload File [/api/v1/file/create](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/file/create)
+
+<details open>
+<summary> See response</summary>
+<p>
+
+```json
+FORM DATA
+
+{
+    "file" : "File.png",
+    "file_location" : "depth1/depth2/branch1"
+}
+
+RESPONSE
+{
+    "id": 2,
+    "owner_id": 1,
+    "folder_id": 16,
+    "file_name": "File.png",
+    "size": 25335,
+    "file_location": "dexter/depth1/depth2/File.png",
+    "is_shared": false,
+    "is_banned": false,
+    "created_at": "2023-08-01T17:40:45.136Z"
+}
+```
+
+</p>
+</details>
 
 ## Test Api Endpoints
 
-> Import given postman collection [v2.1] to Postman and test predefined endpoints.
+> Import given postman collection [v2.1] to Postman and test predefined endpoints.[Change Collection Variable Values Accordingly]
 
 #### License
 

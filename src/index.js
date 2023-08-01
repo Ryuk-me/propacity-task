@@ -10,6 +10,7 @@ import { errorHandler, notFound } from "./middlewares/error.middleware.js"
 import { AuthRouter } from "./routers/api/v1/auth.router.js"
 import { FolderRouter } from "./routers/api/v1/folder.router.js"
 import * as AWS from "./utils/aws_sdk.js"
+import { FileRouter } from "./routers/api/v1/file.router.js"
 
 dotenv.config()
 
@@ -67,6 +68,9 @@ app.use("/api/v1/auth", AuthRouter)
 
 //Folder Routes
 app.use("/api/v1/folder", FolderRouter)
+
+// File Routes
+app.use("/api/v1/file", FileRouter)
 
 // Error Routes
 app.use(notFound)
