@@ -16,7 +16,7 @@
 
 > https://dbdiagram.io/d/64c7e3c502bd1c4a5eff3af9
 
-![Database Schema](./assests/db_schema.png)
+![Database Schema](./assests/schema.png)
 
 > ## Installation
 
