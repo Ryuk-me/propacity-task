@@ -16,7 +16,7 @@
 
 > https://dbdiagram.io/d/64c7e3c502bd1c4a5eff3af9
 
-![Database Schema](./assests/schema.png)
+![Database Schema](./assests/db_schema.png)
 
 > ## Installation
 
@@ -50,7 +50,7 @@ $ http://localhost:${PORT}/health
 
 ```
 
-> GET [/health](https://api-propacity-ryuk-me.cloud.okteto.net/health)
+>[GET] Health Endpoint [/health](https://api-propacity-ryuk-me.cloud.okteto.net/health)
 
 <details open>
 <summary> See response</summary>
@@ -70,32 +70,8 @@ $ http://localhost:${PORT}/health
 </p>
 </details>
 
-> GET [/api/v1/user/me](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/user/me)
 
-<details open>
-<summary> See response</summary>
-<p>
-
-```json
-Headers : Bearer eyJhbGciO.......
-
-{
-    "id": 1,
-    "email": "ryuk@gmail.com",
-    "username": "dexter",
-    "role": "USER",
-    "created_at": "2023-07-31T12:45:57.182Z"
-}
-
-{
-  "message": "Could not validate credentials"
-}
-```
-
-</p>
-</details>
-
-> POST [/api/v1/user](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/user/me)
+>[POST] Create User [/api/v1/user](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/user)
 
 <details open>
 <summary> See response</summary>
@@ -111,8 +87,86 @@ JSON BODY
   "password" : "123"
 }
 
+RESPOSNE
+
 {
-    "message": "A user already exist with this email."
+    "id": 1,
+    "email": "ryuk@gmail.com",
+    "username": "dexter",
+    "role": "USER",
+    "created_at": "2023-08-01T15:56:31.961Z"
+}
+```
+
+</p>
+</details>
+
+>[GET] Current user details [/api/v1/user/me](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/user/me)
+
+<details open>
+<summary> See response</summary>
+<p>
+
+```json
+Headers : Bearer eyJhbGciO.......
+
+{
+    "id": 1,
+    "email": "ryuk@gmail.com",
+    "username": "dexter",
+    "role": "USER",
+    "created_at": "2023-07-31T12:45:57.182Z"
+}
+```
+
+</p>
+</details>
+
+> [POST] Login [/api/v1/auth](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/auth)
+
+<details open>
+<summary> See response</summary>
+<p>
+
+```json
+JSON BODY
+
+{
+  "username" : "dexter",
+  "password" : "123"
+}
+RESPONSE
+{
+    "token_type": "Bearer",
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9......"
+}
+```
+
+</p>
+</details>
+
+>[POST] Create Folder [/api/v1/folder/create](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/folder/create)
+
+<details open>
+<summary> See response</summary>
+<p>
+
+```json
+JSON BODY
+
+{
+    "folder_name" : "depth1/depth2/branch1"
+}
+
+RESPONSE
+{
+    "id": 1,
+    "owner_id": 1,
+    "folder_name": "branch1",
+    "folder_location": "dexter/depth1/depth2/branch1/",
+    "is_allowed_to_create_sub_folder": true,
+    "is_shared": false,
+    "created_at": "2023-08-01T15:45:03.834Z"
 }
 ```
 
