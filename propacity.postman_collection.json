@@ -178,7 +178,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"file_name\" : \"abcd.png\",\r\n    \"file_location\" : \"dexter/depth1/Propacity.png\"\r\n}",
+							"raw": "{\r\n    \"file_name\" : \"abcd.png\",\r\n    \"file_location\" : \"depth1/Propacity.png\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -217,7 +217,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"file_location\" : \"dexter/depth1/abcd.png\"\r\n}",
+							"raw": "{\r\n    \"file_location\" : \"depth1/abcd.png\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -234,6 +234,45 @@
 								"v1",
 								"file",
 								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "movefile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AUTH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"file_location\" : \"depth1/abcd.png\",\r\n    \"new_location\" : \"depth1/depth2/branch1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/file/move",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"file",
+								"move"
 							]
 						}
 					},

@@ -5,5 +5,4 @@ const router = express.Router()
 
 router.post("/create", JWT.verifyAuthToken, FolderController.createFolder)
 
-// router.get("/me", JWT.verifyAuthToken, UserController.whoAmI)
 export { router as FolderRouter }

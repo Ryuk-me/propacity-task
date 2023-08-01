@@ -7,6 +7,6 @@ const router = express.Router()
 router.post("/create", MulterUpload.single("file"), JWT.verifyAuthToken, FileController.createFile)
 router.post("/rename", JWT.verifyAuthToken, FileController.renameFile)
 router.delete("/delete", JWT.verifyAuthToken, FileController.deleteFile)
+router.put("/move", JWT.verifyAuthToken, FileController.moveFile)
 
-// router.get("/me", JWT.verifyAuthToken, UserController.whoAmI)
 export { router as FileRouter }

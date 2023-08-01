@@ -13,7 +13,7 @@ export const createFolder = async (req, res) => {
 	const folder_location = req.user.username + "/" + folder_name + "/"
 	let folder = await getFolder(folder_location)
 
-	if (!folder) {
+	if (folder) {
 		return HttpException(res, 409, "Folder with this name already exist at this location, rename to continue.")
 	}
 	if (folder.owner_id !== req.user.id) return HttpException(res, 401, "Not Authorised")

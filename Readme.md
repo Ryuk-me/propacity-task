@@ -216,7 +216,7 @@ RESPONSE 201
 
 {
     "file_name" : "abcd.png",
-    "file_location" : "dexter/depth1/File.png"
+    "file_location" : "depth1/File.png"
 }
 
 RESPONSE 200
@@ -245,7 +245,57 @@ RESPONSE 200
 ```json
 
 {
-    "file_location" : "dexter/depth1/abcd.png"
+    "file_location" : "depth1/abcd.png"
+}
+
+RESPONSE 204
+
+```
+
+</p>
+</details>
+
+> [POST] Rename File [/api/v1/file/rename](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/file/rename)
+
+<details open>
+<summary> See response</summary>
+<p>
+
+```json
+
+{
+    "file_name" : "abcd.png",
+    "file_location" : "depth1/File.png"
+}
+
+RESPONSE 200
+{
+    "id": 7,
+    "owner_id": 1,
+    "folder_id": 16,
+    "file_name": "abcd.png",
+    "size": 25335,
+    "file_location": "dexter/depth1/abcd.png",
+    "is_shared": false,
+    "is_banned": false,
+    "created_at": "2023-08-01T19:21:14.807Z"
+}
+```
+
+</p>
+</details>
+
+> [PUT] Move File [/api/v1/file/move](https://api-propacity-ryuk-me.cloud.okteto.net/api/v1/file/delete)
+
+<details open>
+<summary> See response</summary>
+<p>
+
+```json
+
+{
+    "file_location" : "depth1/abcd.png",
+    "new_location" : "depth1/depth2/branch1"
 }
 
 RESPONSE 204

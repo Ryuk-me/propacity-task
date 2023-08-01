@@ -80,7 +80,21 @@ export const renameFile = async (file_location, newfilename, folder_location) =>
 		await deleteFile(file_location)
 		return true
 	} catch (error) {
-		console.log(error)
+		return false
+	}
+}
+
+export const moveFile = async (file_location, new_folder_location, file_name) => {
+	const command = new CopyObjectCommand({
+		Bucket: BUCKET_NAME,
+		CopySource: `${BUCKET_NAME}/${file_location}`,
+		Key: `${new_folder_location}${file_name}`
+	})
+	try {
+		const res = await client.send(command)
+		await deleteFile(file_location)
+		return true
+	} catch (error) {
 		return false
 	}
 }
