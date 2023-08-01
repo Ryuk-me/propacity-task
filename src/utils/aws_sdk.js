@@ -1,4 +1,10 @@
-import { S3Client, CreateBucketCommand, PutObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3"
+import {
+	S3Client,
+	CreateBucketCommand,
+	PutObjectCommand,
+	CopyObjectCommand,
+	DeleteObjectCommand
+} from "@aws-sdk/client-s3"
 import { createReadStream } from "fs"
 import dotenv from "dotenv"
 dotenv.config()
@@ -54,6 +60,35 @@ export const uploadFile = async function (file, location, filename) {
 		Bucket: BUCKET_NAME,
 		Key: `${location}${filename}`,
 		Body: fileStream
+	})
+	try {
+		const res = await client.send(command)
+		return true
+	} catch (error) {
+		return false
+	}
+}
+
+export const renameFile = async (file_location, newfilename, folder_location) => {
+	const command = new CopyObjectCommand({
+		Bucket: BUCKET_NAME,
+		CopySource: `${BUCKET_NAME}/${file_location}`,
+		Key: `${folder_location}${newfilename}`
+	})
+	try {
+		const res = await client.send(command)
+		await deleteFile(file_location)
+		return true
+	} catch (error) {
+		console.log(error)
+		return false
+	}
+}
+
+export const deleteFile = async (file_location) => {
+	const command = new DeleteObjectCommand({
+		Bucket: BUCKET_NAME,
+		Key: `${file_location}`
 	})
 	try {
 		const res = await client.send(command)

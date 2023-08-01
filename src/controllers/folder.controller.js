@@ -11,9 +11,12 @@ export const createFolder = async (req, res) => {
 
 	const owner_id = req.user.id
 	const folder_location = req.user.username + "/" + folder_name + "/"
-	if (await isLocationExist(folder_location)) {
+	let folder = await getFolder(folder_location)
+
+	if (!folder) {
 		return HttpException(res, 409, "Folder with this name already exist at this location, rename to continue.")
 	}
+	if (folder.owner_id !== req.user.id) return HttpException(res, 401, "Not Authorised")
 	try {
 		if (!(await AWS.createFolder(folder_location))) return HttpException(res, 500, "Not able to create folder on AWS.")
 		const newFolder = await db.folder.create({
@@ -29,26 +32,11 @@ export const createFolder = async (req, res) => {
 	}
 }
 
-export const isLocationExist = async (folder_location) => {
-	let exist = await db.folder.findUnique({
+export const getFolder = async (folder_location) => {
+	let folder = await db.folder.findUnique({
 		where: {
 			folder_location: folder_location
 		}
 	})
-	return true ? exist : false
+	return folder
 }
-
-// export const isAllowedToCreateSubfolders = async (owner_id) => {
-
-//   let exist = await db.folder.findUnique({
-//     where: {
-//       AND: [{
-//         is_allowed_to_create_sub_folder: true,
-
-//       }, {
-//         owner_id: owner_id
-//       }]
-//     }
-//   })
-//   return
-// }
