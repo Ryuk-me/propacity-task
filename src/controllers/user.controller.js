@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client"
 import { hashPassword } from "../utils/hashing.js"
 import HttpException from "../utils/httpException.js"
 
+// https://www.prisma.io/docs/concepts/components/prisma-client/excluding-fields
 export const exclude = (user, ...keys) => {
 	for (let key of keys) {
 		delete user[key]

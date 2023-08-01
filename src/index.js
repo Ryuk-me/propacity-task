@@ -8,13 +8,17 @@ import { isConnected } from "./db.js"
 import { UserRouter } from "./routers/api/v1/user.router.js"
 import { errorHandler, notFound } from "./middlewares/error.middleware.js"
 import { AuthRouter } from "./routers/api/v1/auth.router.js"
+import { FolderRouter } from "./routers/api/v1/folder.router.js"
+import * as AWS from "./utils/aws_sdk.js"
+
 dotenv.config()
 
 console.log(
 	"🚀",
 	"@" + packageJson.author.username + "/" + packageJson.name,
 	"v" + packageJson.version + ` [${process.env.NODE_ENV}]`,
-	(await isConnected()) ? "[🟢 Database]" : "[🔴 Database]"
+	(await isConnected()) ? "[🟢 Database]" : "[🔴 Database]",
+	"\n" + (await AWS.createBucket())
 )
 
 // PORT
@@ -57,8 +61,14 @@ app.use("/health", async (req, res) => {
 
 // User Routes
 app.use("/api/v1/user", UserRouter)
+
+// Auth Routes
 app.use("/api/v1/auth", AuthRouter)
 
+//Folder Routes
+app.use("/api/v1/folder", FolderRouter)
+
+// Error Routes
 app.use(notFound)
 app.use(errorHandler)
 

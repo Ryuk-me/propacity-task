@@ -9,6 +9,7 @@
 - Prisma (ORM)
 - Docker
 - PNPM package manager
+- AWS S3 Storage to Store Data
 
 <hr>
 
