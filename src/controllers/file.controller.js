@@ -100,6 +100,7 @@ export const moveFile = async (req, res) => {
 				id: file.id
 			},
 			data: {
+				folder_id: folder.id,
 				file_location: new_location + file.file_name
 			}
 		})
